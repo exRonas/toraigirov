@@ -115,8 +115,16 @@ export function Footer({ settings }: { settings: Settings }) {
       </div>
 
       <div className="border-t border-white/10">
-        <div className="mx-auto max-w-site px-4 py-4 text-center text-xs text-white/50">
-          © {new Date().getFullYear()} {footerText}. {tr("footer.rights")}.
+        <div className="mx-auto flex max-w-site items-center justify-between px-4 py-4">
+          <span className="text-xs text-white/50">
+            © {new Date().getFullYear()} {footerText}. {tr("footer.rights")}.
+          </span>
+          <Link
+            href="/admin"
+            className="text-xs text-white/25 transition-colors hover:text-white/60"
+          >
+            {lang === "ru" ? "Для администратора" : "Әкімші үшін"}
+          </Link>
         </div>
       </div>
     </footer>
