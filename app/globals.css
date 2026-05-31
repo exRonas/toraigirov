@@ -2,92 +2,82 @@
 @tailwind components;
 @tailwind utilities;
 
-/* ─────────────────────────────────────────────────────────────────────────
-   Цветовая схема — точно из design-v0/app/globals.css
-   Архивно-академический стиль: тёплый пергамент + приглушённые акценты
-   ───────────────────────────────────────────────────────────────────────── */
+/*
+  Цветовая схема — 1:1 из design-v0/app/globals.css (Tailwind v3)
+  ВСЕ значения прямые, без цепочек var().
+*/
 :root {
-  --background: oklch(0.975 0.002 90);
-  --foreground: oklch(0.18 0.02 45);
-  --card: oklch(0.99 0.001 90);
-  --card-foreground: oklch(0.18 0.02 45);
-  --popover: oklch(0.99 0.001 90);
-  --popover-foreground: oklch(0.18 0.02 45);
-  --primary: oklch(0.35 0.06 250);
-  --primary-foreground: oklch(0.98 0 0);
-  --secondary: oklch(0.94 0.01 90);
+  /* ── Канонические токены design-v0 ── */
+  --background:         oklch(0.975 0.002 90);   /* тёплый пергамент */
+  --foreground:         oklch(0.18  0.02  45);   /* тёмно-коричневый текст */
+  --card:               oklch(0.99  0.001 90);   /* почти белый фон карточек */
+  --card-foreground:    oklch(0.18  0.02  45);
+  --popover:            oklch(0.99  0.001 90);
+  --popover-foreground: oklch(0.18  0.02  45);
+  --primary:            oklch(0.35  0.06  250);  /* тёмно-синий/индиго */
+  --primary-foreground: oklch(0.98  0     0);    /* белый */
+  --secondary:          oklch(0.94  0.01  90);   /* светло-бежевый фон */
   --secondary-foreground: oklch(0.25 0.02 45);
-  --muted: oklch(0.92 0.01 90);
-  --muted-foreground: oklch(0.45 0.02 45);
-  --accent: oklch(0.40 0.08 45);
-  --accent-foreground: oklch(0.98 0 0);
-  --destructive: oklch(0.55 0.2 25);
-  --destructive-foreground: oklch(0.98 0 0);
-  --border: oklch(0.88 0.01 90);
-  --input: oklch(0.92 0.01 90);
-  --ring: oklch(0.35 0.06 250);
-  --radius: 0.375rem;
+  --muted:              oklch(0.92  0.01  90);   /* приглушённый фон */
+  --muted-foreground:   oklch(0.45  0.02  45);   /* серо-коричневый текст */
+  --accent:             oklch(0.40  0.08  45);   /* тёплый терракот */
+  --accent-foreground:  oklch(0.98  0     0);
+  --destructive:        oklch(0.55  0.2   25);
+  --destructive-foreground: oklch(0.98 0  0);
+  --border:             oklch(0.88  0.01  90);   /* тёплая граница */
+  --input:              oklch(0.92  0.01  90);
+  --ring:               oklch(0.35  0.06  250);
+  --radius:             0.375rem;
 
-  /* Sidebar (используется в AdminShell) */
-  --sidebar: oklch(0.96 0.002 90);
-  --sidebar-foreground: oklch(0.18 0.02 45);
-  --sidebar-primary: oklch(0.35 0.06 250);
-  --sidebar-primary-foreground: oklch(0.98 0 0);
-  --sidebar-accent: oklch(0.92 0.01 90);
-  --sidebar-accent-foreground: oklch(0.25 0.02 45);
-  --sidebar-border: oklch(0.88 0.01 90);
-  --sidebar-ring: oklch(0.35 0.06 250);
-
-  /* ── Алиасы для Tailwind-конфига проекта ──
-     Эти переменные используются в tailwind.config.ts как цвета сайта.
-     Они просто перенаправляют на канонические CSS-переменные design-v0. */
-
-  /* Фон страницы (был: #F5F0E6) */
-  --color-bg: var(--background);
-  /* Фон карточек */
-  --color-surface: var(--card);
-  /* Основной акцент (был: бордо #7B2D2D) — теперь синий oklch(0.35 0.06 250) */
-  --color-primary: var(--primary);
-  --color-primary-hover: oklch(0.42 0.07 250);
-  /* Вторичный акцент (был: золото) — коричнево-терракотовый */
-  --color-secondary: var(--accent);
-  /* Основной текст */
-  --color-text: var(--foreground);
-  /* Приглушённый текст */
-  --color-text-muted: var(--muted-foreground);
-  /* Рамки */
-  --color-border: var(--border);
-  /* Навигационный бар */
-  --color-nav-bg: oklch(0.35 0.06 250);
-  --color-nav-bar: oklch(0.40 0.065 250);
-  --color-nav-text: oklch(0.98 0 0);
+  /* ── Псевдонимы для компонентов сайта ──
+     (прямые значения, не цепочки var) */
+  --c-bg:          oklch(0.975 0.002 90);   /* page background   */
+  --c-surface:     oklch(0.99  0.001 90);   /* card / panel bg   */
+  --c-primary:     oklch(0.35  0.06  250);  /* links, buttons    */
+  --c-primary-h:   oklch(0.42  0.07  250);  /* primary hover     */
+  --c-badge:       oklch(0.40  0.08  45);   /* badges, secondary accents */
+  --c-text:        oklch(0.18  0.02  45);   /* main text         */
+  --c-muted:       oklch(0.45  0.02  45);   /* muted text        */
+  --c-border:      oklch(0.88  0.01  90);   /* borders           */
+  --c-nav:         oklch(0.35  0.06  250);  /* top-bar bg        */
+  --c-nav-bar:     oklch(0.40  0.065 250);  /* nav row bg        */
+  --c-nav-text:    oklch(0.98  0     0);    /* text on dark nav  */
 }
 
 /* Режим высокой контрастности (из design-v0) */
 .high-contrast {
-  --background: oklch(1 0 0);
-  --foreground: oklch(0 0 0);
-  --card: oklch(1 0 0);
-  --card-foreground: oklch(0 0 0);
-  --popover: oklch(1 0 0);
-  --popover-foreground: oklch(0 0 0);
-  --primary: oklch(0.25 0.08 250);
+  --background:         oklch(1 0 0);
+  --foreground:         oklch(0 0 0);
+  --card:               oklch(1 0 0);
+  --card-foreground:    oklch(0 0 0);
+  --primary:            oklch(0.25 0.08 250);
   --primary-foreground: oklch(1 0 0);
-  --secondary: oklch(0.95 0 0);
+  --secondary:          oklch(0.95 0 0);
   --secondary-foreground: oklch(0 0 0);
-  --muted: oklch(0.9 0 0);
-  --muted-foreground: oklch(0.2 0 0);
-  --accent: oklch(0.30 0.1 45);
-  --accent-foreground: oklch(1 0 0);
-  --border: oklch(0 0 0);
-  --input: oklch(0.95 0 0);
-  --ring: oklch(0.25 0.08 250);
+  --muted:              oklch(0.9 0 0);
+  --muted-foreground:   oklch(0.2 0 0);
+  --accent:             oklch(0.30 0.1 45);
+  --accent-foreground:  oklch(1 0 0);
+  --border:             oklch(0 0 0);
+  --input:              oklch(0.95 0 0);
+  --ring:               oklch(0.25 0.08 250);
+
+  --c-bg:       oklch(1 0 0);
+  --c-surface:  oklch(1 0 0);
+  --c-primary:  oklch(0.25 0.08 250);
+  --c-primary-h:oklch(0.32 0.09 250);
+  --c-badge:    oklch(0.30 0.1 45);
+  --c-text:     oklch(0 0 0);
+  --c-muted:    oklch(0.2 0 0);
+  --c-border:   oklch(0 0 0);
+  --c-nav:      oklch(0.25 0.08 250);
+  --c-nav-bar:  oklch(0.30 0.09 250);
+  --c-nav-text: oklch(1 0 0);
 }
 
 @layer base {
   * {
-    border-color: var(--border);
-    outline-color: color-mix(in oklch, var(--ring) 50%, transparent);
+    border-color: var(--c-border);
   }
   html {
     -webkit-text-size-adjust: 100%;
@@ -102,9 +92,6 @@
     font-family: var(--font-playfair), Georgia, serif;
     color: var(--foreground);
   }
-  a {
-    color: inherit;
-  }
   ::selection {
     background: var(--accent);
     color: var(--accent-foreground);
@@ -112,11 +99,8 @@
 }
 
 @layer components {
-  /* ── Рендеринг богатого HTML (Tiptap / страницы) ── */
-  .rich {
-    color: var(--foreground);
-    line-height: 1.8;
-  }
+  /* Рендеринг HTML-контента (Tiptap / страницы) */
+  .rich { color: var(--foreground); line-height: 1.8; }
   .rich p { margin: 0 0 1rem; }
   .rich h2 { font-size: 1.6em; margin: 1.8rem 0 0.8rem; line-height: 1.25; }
   .rich h3 { font-size: 1.3em; margin: 1.4rem 0 0.6rem; }
@@ -124,62 +108,27 @@
   .rich ul  { list-style: disc; }
   .rich ol  { list-style: decimal; }
   .rich li  { margin: 0.25rem 0; }
-  .rich a   {
-    color: var(--primary);
-    text-decoration: underline;
-    text-underline-offset: 2px;
-  }
-  .rich a:hover { color: var(--color-primary-hover); }
-  .rich blockquote {
-    border-left: 3px solid var(--accent);
-    padding-left: 1rem;
-    margin: 1.2rem 0;
-    font-style: italic;
-    color: var(--muted-foreground);
-  }
-  .rich img {
-    max-width: 100%;
-    height: auto;
-    border-radius: var(--radius);
-    margin: 1rem 0;
-  }
+  .rich a   { color: var(--c-primary); text-decoration: underline; text-underline-offset: 2px; }
+  .rich a:hover { color: var(--c-primary-h); }
+  .rich blockquote { border-left: 3px solid var(--c-badge); padding-left: 1rem; margin: 1.2rem 0; font-style: italic; color: var(--c-muted); }
+  .rich img { max-width: 100%; height: auto; border-radius: var(--radius); margin: 1rem 0; }
   .rich strong { font-weight: 600; }
 
-  /* ── А А А — смена размера шрифта ── */
+  /* А А А — смена размера шрифта */
   .content-sm { font-size: 0.95rem; }
   .content-md { font-size: 1.075rem; }
   .content-lg { font-size: 1.25rem; }
 
-  /* ── Скелетон-загрузка ── */
-  .skeleton {
-    position: relative;
-    overflow: hidden;
-    background: var(--muted);
-    border-radius: var(--radius);
-  }
+  /* Скелетон */
+  .skeleton { position: relative; overflow: hidden; background: var(--muted); border-radius: var(--radius); }
   .skeleton::after {
-    content: "";
-    position: absolute;
-    inset: 0;
-    transform: translateX(-100%);
-    background: linear-gradient(
-      90deg,
-      transparent,
-      rgba(255, 255, 255, 0.45),
-      transparent
-    );
+    content: ""; position: absolute; inset: 0; transform: translateX(-100%);
+    background: linear-gradient(90deg, transparent, rgba(255,255,255,.5), transparent);
     animation: shimmer 1.5s infinite;
   }
-  @keyframes shimmer {
-    100% { transform: translateX(100%); }
-  }
-
-  /* ── Карточки ── */
-  .card-shadow { box-shadow: 0 1px 3px color-mix(in oklch, var(--foreground) 8%, transparent), 0 1px 2px color-mix(in oklch, var(--foreground) 4%, transparent); }
-  .card-shadow-hover { box-shadow: 0 8px 24px color-mix(in oklch, var(--foreground) 12%, transparent); }
+  @keyframes shimmer { 100% { transform: translateX(100%); } }
 }
 
-/* ── Печать: скрыть хром, оставить только контент ── */
 @media print {
   .no-print { display: none !important; }
   body { background: #fff; color: #000; }
