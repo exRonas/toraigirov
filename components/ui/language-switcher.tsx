@@ -4,36 +4,28 @@ import { useLanguage } from "@/components/providers/language-provider";
 
 export function LanguageSwitcher() {
   const { lang, setLang } = useLanguage();
+
   return (
     <div
-      className="flex items-center overflow-hidden rounded border border-white/25"
+      className="flex items-center gap-0.5 rounded-full border border-white/25 p-0.5"
       role="group"
       aria-label="Тіл / Язык"
     >
-      <button
-        onClick={() => setLang("ru")}
-        className={`px-2.5 py-1 text-xs font-semibold transition-colors ${
-          lang === "ru"
-            ? "bg-secondary text-white"
-            : "text-nav-text/80 hover:bg-white/10"
-        }`}
-        aria-pressed={lang === "ru"}
-        aria-label="Русский язык"
-      >
-        RU
-      </button>
-      <button
-        onClick={() => setLang("kz")}
-        className={`px-2.5 py-1 text-xs font-semibold transition-colors ${
-          lang === "kz"
-            ? "bg-secondary text-white"
-            : "text-nav-text/80 hover:bg-white/10"
-        }`}
-        aria-pressed={lang === "kz"}
-        aria-label="Қазақ тілі"
-      >
-        KZ
-      </button>
+      {(["ru", "kz"] as const).map((l) => (
+        <button
+          key={l}
+          onClick={() => setLang(l)}
+          aria-pressed={lang === l}
+          aria-label={l === "ru" ? "Русский язык" : "Қазақ тілі"}
+          className={`rounded-full px-3 py-1 text-xs font-semibold transition-all duration-150 ${
+            lang === l
+              ? "bg-white text-primary shadow-sm"          // белая таблетка, синий текст
+              : "text-white/65 hover:bg-white/10 hover:text-white"
+          }`}
+        >
+          {l.toUpperCase()}
+        </button>
+      ))}
     </div>
   );
 }
