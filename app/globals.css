@@ -90,7 +90,8 @@
   }
   h1, h2, h3, h4 {
     font-family: var(--font-playfair), Georgia, serif;
-    color: var(--foreground);
+    /* color намеренно не задан — наследуется от родителя,
+       чтобы text-white / text-foreground на компонентах работали */
   }
   ::selection {
     background: var(--accent);
