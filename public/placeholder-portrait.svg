@@ -1,9 +1,9 @@
 <svg xmlns="http://www.w3.org/2000/svg" width="600" height="760" viewBox="0 0 600 760" role="img" aria-label="Portrait placeholder">
-  <rect width="600" height="760" fill="#3d1f1f"/>
-  <rect x="14" y="14" width="572" height="732" fill="none" stroke="#c4973a" stroke-width="3"/>
-  <circle cx="300" cy="290" r="120" fill="#5a2e2e"/>
-  <circle cx="300" cy="255" r="58" fill="#7b2d2d"/>
-  <path d="M180 470c0-66 54-120 120-120s120 54 120 120v40H180z" fill="#7b2d2d"/>
-  <text x="300" y="610" text-anchor="middle" font-family="Georgia, serif" font-size="34" fill="#f5f0e6">С. Торайғыров</text>
-  <text x="300" y="655" text-anchor="middle" font-family="Georgia, serif" font-size="24" fill="#c4973a">1893–1920</text>
+  <rect width="600" height="760" fill="oklch(0.35 0.06 250)" />
+  <rect x="14" y="14" width="572" height="732" fill="none" stroke="oklch(0.40 0.08 45)" stroke-width="3"/>
+  <circle cx="300" cy="290" r="120" fill="oklch(0.42 0.07 250)"/>
+  <circle cx="300" cy="255" r="58" fill="oklch(0.55 0.06 250)"/>
+  <path d="M180 470c0-66 54-120 120-120s120 54 120 120v40H180z" fill="oklch(0.55 0.06 250)"/>
+  <text x="300" y="610" text-anchor="middle" font-family="Georgia, serif" font-size="34" fill="oklch(0.98 0 0)">С. Торайғыров</text>
+  <text x="300" y="655" text-anchor="middle" font-family="Georgia, serif" font-size="24" fill="oklch(0.75 0.06 90)">1893–1920</text>
 </svg>

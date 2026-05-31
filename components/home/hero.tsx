@@ -16,7 +16,7 @@ export function Hero({
   const [imgSrc, setImgSrc] = useState("/uploads/toraygyrov.jpg");
 
   return (
-    <section className="border-b border-border bg-gradient-to-b from-[#efe7d6] to-bg">
+    <section className="border-b border-border bg-gradient-to-b from-muted to-background">
       <div className="mx-auto grid max-w-site items-center gap-8 px-4 py-12 md:grid-cols-[300px_1fr] md:py-16">
         <div className="mx-auto w-full max-w-[300px]">
           <div className="relative aspect-[3/4] overflow-hidden rounded-lg border-4 border-secondary bg-nav-bg shadow-card-hover">

@@ -2,119 +2,160 @@
 @tailwind components;
 @tailwind utilities;
 
+/* ─────────────────────────────────────────────────────────────────────────
+   Цветовая схема — точно из design-v0/app/globals.css
+   Архивно-академический стиль: тёплый пергамент + приглушённые акценты
+   ───────────────────────────────────────────────────────────────────────── */
 :root {
-  --color-bg: #f5f0e6; /* warm ivory — main background */
-  --color-surface: #ffffff; /* card backgrounds */
-  --color-primary: #7b2d2d; /* deep burgundy — primary accent, links */
-  --color-primary-hover: #9b3d3d;
-  --color-secondary: #c4973a; /* muted gold — secondary accent, badges */
-  --color-text: #2c2526; /* near-black text */
-  --color-text-muted: #6b5b5b; /* secondary text */
-  --color-border: #e2d5c3; /* warm beige borders */
-  --color-nav-bg: #3d1f1f; /* dark brown top bar */
-  --color-nav-bar: #5a2e2e; /* slightly lighter brown nav row */
-  --color-nav-text: #f5f0e6; /* ivory text on dark nav */
+  --background: oklch(0.975 0.002 90);
+  --foreground: oklch(0.18 0.02 45);
+  --card: oklch(0.99 0.001 90);
+  --card-foreground: oklch(0.18 0.02 45);
+  --popover: oklch(0.99 0.001 90);
+  --popover-foreground: oklch(0.18 0.02 45);
+  --primary: oklch(0.35 0.06 250);
+  --primary-foreground: oklch(0.98 0 0);
+  --secondary: oklch(0.94 0.01 90);
+  --secondary-foreground: oklch(0.25 0.02 45);
+  --muted: oklch(0.92 0.01 90);
+  --muted-foreground: oklch(0.45 0.02 45);
+  --accent: oklch(0.40 0.08 45);
+  --accent-foreground: oklch(0.98 0 0);
+  --destructive: oklch(0.55 0.2 25);
+  --destructive-foreground: oklch(0.98 0 0);
+  --border: oklch(0.88 0.01 90);
+  --input: oklch(0.92 0.01 90);
+  --ring: oklch(0.35 0.06 250);
+  --radius: 0.375rem;
+
+  /* Sidebar (используется в AdminShell) */
+  --sidebar: oklch(0.96 0.002 90);
+  --sidebar-foreground: oklch(0.18 0.02 45);
+  --sidebar-primary: oklch(0.35 0.06 250);
+  --sidebar-primary-foreground: oklch(0.98 0 0);
+  --sidebar-accent: oklch(0.92 0.01 90);
+  --sidebar-accent-foreground: oklch(0.25 0.02 45);
+  --sidebar-border: oklch(0.88 0.01 90);
+  --sidebar-ring: oklch(0.35 0.06 250);
+
+  /* ── Алиасы для Tailwind-конфига проекта ──
+     Эти переменные используются в tailwind.config.ts как цвета сайта.
+     Они просто перенаправляют на канонические CSS-переменные design-v0. */
+
+  /* Фон страницы (был: #F5F0E6) */
+  --color-bg: var(--background);
+  /* Фон карточек */
+  --color-surface: var(--card);
+  /* Основной акцент (был: бордо #7B2D2D) — теперь синий oklch(0.35 0.06 250) */
+  --color-primary: var(--primary);
+  --color-primary-hover: oklch(0.42 0.07 250);
+  /* Вторичный акцент (был: золото) — коричнево-терракотовый */
+  --color-secondary: var(--accent);
+  /* Основной текст */
+  --color-text: var(--foreground);
+  /* Приглушённый текст */
+  --color-text-muted: var(--muted-foreground);
+  /* Рамки */
+  --color-border: var(--border);
+  /* Навигационный бар */
+  --color-nav-bg: oklch(0.35 0.06 250);
+  --color-nav-bar: oklch(0.40 0.065 250);
+  --color-nav-text: oklch(0.98 0 0);
+}
+
+/* Режим высокой контрастности (из design-v0) */
+.high-contrast {
+  --background: oklch(1 0 0);
+  --foreground: oklch(0 0 0);
+  --card: oklch(1 0 0);
+  --card-foreground: oklch(0 0 0);
+  --popover: oklch(1 0 0);
+  --popover-foreground: oklch(0 0 0);
+  --primary: oklch(0.25 0.08 250);
+  --primary-foreground: oklch(1 0 0);
+  --secondary: oklch(0.95 0 0);
+  --secondary-foreground: oklch(0 0 0);
+  --muted: oklch(0.9 0 0);
+  --muted-foreground: oklch(0.2 0 0);
+  --accent: oklch(0.30 0.1 45);
+  --accent-foreground: oklch(1 0 0);
+  --border: oklch(0 0 0);
+  --input: oklch(0.95 0 0);
+  --ring: oklch(0.25 0.08 250);
 }
 
 @layer base {
   * {
-    border-color: var(--color-border);
+    border-color: var(--border);
+    outline-color: color-mix(in oklch, var(--ring) 50%, transparent);
   }
   html {
     -webkit-text-size-adjust: 100%;
   }
   body {
-    background-color: var(--color-bg);
-    color: var(--color-text);
+    background-color: var(--background);
+    color: var(--foreground);
     font-family: var(--font-inter), var(--font-noto), system-ui, sans-serif;
     text-rendering: optimizeLegibility;
   }
   h1, h2, h3, h4 {
     font-family: var(--font-playfair), Georgia, serif;
-    color: var(--color-text);
+    color: var(--foreground);
   }
   a {
     color: inherit;
   }
   ::selection {
-    background: var(--color-secondary);
-    color: #fff;
+    background: var(--accent);
+    color: var(--accent-foreground);
   }
 }
 
 @layer components {
-  /* Rendered rich HTML content (Tiptap output, poem text, page bodies) */
+  /* ── Рендеринг богатого HTML (Tiptap / страницы) ── */
   .rich {
-    color: var(--color-text);
+    color: var(--foreground);
     line-height: 1.8;
   }
-  .rich p {
-    margin: 0 0 1rem;
-  }
-  .rich h2 {
-    font-size: 1.6em;
-    margin: 1.8rem 0 0.8rem;
-    line-height: 1.25;
-  }
-  .rich h3 {
-    font-size: 1.3em;
-    margin: 1.4rem 0 0.6rem;
-  }
-  .rich ul,
-  .rich ol {
-    margin: 0 0 1rem 1.4rem;
-  }
-  .rich ul {
-    list-style: disc;
-  }
-  .rich ol {
-    list-style: decimal;
-  }
-  .rich li {
-    margin: 0.25rem 0;
-  }
-  .rich a {
-    color: var(--color-primary);
+  .rich p { margin: 0 0 1rem; }
+  .rich h2 { font-size: 1.6em; margin: 1.8rem 0 0.8rem; line-height: 1.25; }
+  .rich h3 { font-size: 1.3em; margin: 1.4rem 0 0.6rem; }
+  .rich ul, .rich ol { margin: 0 0 1rem 1.4rem; }
+  .rich ul  { list-style: disc; }
+  .rich ol  { list-style: decimal; }
+  .rich li  { margin: 0.25rem 0; }
+  .rich a   {
+    color: var(--primary);
     text-decoration: underline;
     text-underline-offset: 2px;
   }
-  .rich a:hover {
-    color: var(--color-primary-hover);
-  }
+  .rich a:hover { color: var(--color-primary-hover); }
   .rich blockquote {
-    border-left: 3px solid var(--color-secondary);
+    border-left: 3px solid var(--accent);
     padding-left: 1rem;
     margin: 1.2rem 0;
     font-style: italic;
-    color: var(--color-text-muted);
+    color: var(--muted-foreground);
   }
   .rich img {
     max-width: 100%;
     height: auto;
-    border-radius: 0.375rem;
+    border-radius: var(--radius);
     margin: 1rem 0;
   }
-  .rich strong {
-    font-weight: 600;
-  }
+  .rich strong { font-weight: 600; }
 
-  /* Reading font-size scale (А А А changer) */
-  .content-sm {
-    font-size: 0.95rem;
-  }
-  .content-md {
-    font-size: 1.075rem;
-  }
-  .content-lg {
-    font-size: 1.25rem;
-  }
+  /* ── А А А — смена размера шрифта ── */
+  .content-sm { font-size: 0.95rem; }
+  .content-md { font-size: 1.075rem; }
+  .content-lg { font-size: 1.25rem; }
 
-  /* Skeleton shimmer */
+  /* ── Скелетон-загрузка ── */
   .skeleton {
     position: relative;
     overflow: hidden;
-    background: #e9e0d0;
-    border-radius: 0.375rem;
+    background: var(--muted);
+    border-radius: var(--radius);
   }
   .skeleton::after {
     content: "";
@@ -124,32 +165,24 @@
     background: linear-gradient(
       90deg,
       transparent,
-      rgba(255, 255, 255, 0.55),
+      rgba(255, 255, 255, 0.45),
       transparent
     );
     animation: shimmer 1.5s infinite;
   }
   @keyframes shimmer {
-    100% {
-      transform: translateX(100%);
-    }
+    100% { transform: translateX(100%); }
   }
+
+  /* ── Карточки ── */
+  .card-shadow { box-shadow: 0 1px 3px color-mix(in oklch, var(--foreground) 8%, transparent), 0 1px 2px color-mix(in oklch, var(--foreground) 4%, transparent); }
+  .card-shadow-hover { box-shadow: 0 8px 24px color-mix(in oklch, var(--foreground) 12%, transparent); }
 }
 
-/* Print: hide chrome, show only article content cleanly */
+/* ── Печать: скрыть хром, оставить только контент ── */
 @media print {
-  .no-print {
-    display: none !important;
-  }
-  body {
-    background: #fff;
-    color: #000;
-  }
-  main {
-    max-width: 100% !important;
-  }
-  a {
-    text-decoration: none;
-    color: #000;
-  }
+  .no-print { display: none !important; }
+  body { background: #fff; color: #000; }
+  main { max-width: 100% !important; }
+  a { text-decoration: none; color: #000; }
 }
