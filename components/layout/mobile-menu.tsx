@@ -53,7 +53,13 @@ export function MobileMenu({
                 {tr("nav.home")}
               </Link>
             </li>
-            {SECTIONS.map((s) => (
+            {[...SECTIONS]
+              .sort((a, b) => {
+                const la = lang === "ru" ? a.ru : a.kz;
+                const lb = lang === "ru" ? b.ru : b.kz;
+                return la.localeCompare(lb, lang === "ru" ? "ru" : "kk", { sensitivity: "base" });
+              })
+              .map((s) => (
               <li key={s.slug}>
                 <Link
                   href={withLang(s.href)}

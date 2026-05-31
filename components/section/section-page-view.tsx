@@ -24,7 +24,7 @@ export async function SectionPageView({
     prisma.page.findUnique({ where: { slug } }),
     prisma.article.findMany({
       where: { sectionSlug: slug, isDraft: false },
-      orderBy: { publishedAt: "desc" },
+      orderBy: lang === "ru" ? { title_ru: "asc" } : { title_kz: "asc" },
     }),
   ]);
 

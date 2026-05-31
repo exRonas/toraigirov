@@ -12,10 +12,18 @@ export function generateMetadata({ searchParams }: { searchParams: { lang?: stri
   return sectionMetadata("poems", searchParams);
 }
 
-export default async function PoemsPage() {
+export default async function PoemsPage({
+  searchParams,
+}: {
+  searchParams: { lang?: string };
+}) {
+  const lang = (searchParams.lang === "ru" ? "ru" : "kz") as "ru" | "kz";
+
   const [page, poems] = await Promise.all([
     prisma.page.findUnique({ where: { slug: "poems" } }),
-    prisma.poem.findMany({ orderBy: [{ yearWritten: "asc" }, { createdAt: "asc" }] }),
+    prisma.poem.findMany({
+      orderBy: lang === "ru" ? { title_ru: "asc" } : { title_kz: "asc" },
+    }),
   ]);
 
   return (

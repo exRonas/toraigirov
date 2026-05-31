@@ -19,7 +19,13 @@ export function Sidebar() {
           {tr("home.sections")}
         </h2>
         <ul className="space-y-0.5">
-          {SECTIONS.map((s) => {
+          {[...SECTIONS]
+            .sort((a, b) => {
+              const la = lang === "ru" ? a.ru : a.kz;
+              const lb = lang === "ru" ? b.ru : b.kz;
+              return la.localeCompare(lb, lang === "ru" ? "ru" : "kk", { sensitivity: "base" });
+            })
+            .map((s) => {
             const active =
               pathname === s.href || pathname.startsWith(s.href + "/");
             return (
@@ -36,7 +42,8 @@ export function Sidebar() {
                 </Link>
               </li>
             );
-          })}
+          })
+          }
         </ul>
       </div>
 

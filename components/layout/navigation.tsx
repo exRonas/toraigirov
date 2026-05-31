@@ -12,6 +12,13 @@ export function Navigation() {
 
   const isHome = pathname === "/" || pathname === "";
 
+  // Сортировка по алфавиту в текущем языке
+  const sorted = [...SECTIONS].sort((a, b) => {
+    const la = lang === "ru" ? a.ru : a.kz;
+    const lb = lang === "ru" ? b.ru : b.kz;
+    return la.localeCompare(lb, lang === "ru" ? "ru" : "kk", { sensitivity: "base" });
+  });
+
   return (
     <nav aria-label="Основные разделы" className="hidden lg:block">
       <ul className="mx-auto flex max-w-site flex-wrap items-center justify-center gap-1 px-4 py-2">
@@ -33,7 +40,7 @@ export function Navigation() {
         {/* Разделитель */}
         <li aria-hidden className="mx-1 h-4 w-px bg-white/20" />
 
-        {SECTIONS.map((s) => {
+        {sorted.map((s) => {
           const active =
             pathname === s.href ||
             pathname.startsWith(s.href + "/") ||

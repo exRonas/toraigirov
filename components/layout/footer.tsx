@@ -19,7 +19,13 @@ export function Footer({ settings }: { settings: Settings }) {
     { label: "YouTube", href: settings.linkYoutube },
   ].filter((s) => s.href);
 
-  const half = Math.ceil(SECTIONS.length / 2);
+  // Алфавитная сортировка по текущему языку
+  const sorted = [...SECTIONS].sort((a, b) => {
+    const la = lang === "ru" ? a.ru : a.kz;
+    const lb = lang === "ru" ? b.ru : b.kz;
+    return la.localeCompare(lb, lang === "ru" ? "ru" : "kk", { sensitivity: "base" });
+  });
+  const half = Math.ceil(sorted.length / 2);
 
   return (
     <footer className="mt-12 border-t-2 border-white/20 bg-nav-bg text-nav-text no-print">
@@ -34,7 +40,7 @@ export function Footer({ settings }: { settings: Settings }) {
         <div>
           <h3 className="mb-3 font-serif text-base text-white">{tr("footer.sections")}</h3>
           <ul className="space-y-1.5 text-sm text-white/70">
-            {SECTIONS.slice(0, half).map((s) => (
+            {sorted.slice(0, half).map((s) => (
               <li key={s.slug}>
                 <Link href={withLang(s.href)} className="transition-colors hover:text-white">
                   {lang === "ru" ? s.ru : s.kz}
@@ -48,7 +54,7 @@ export function Footer({ settings }: { settings: Settings }) {
         <div>
           <h3 className="mb-3 font-serif text-base text-white sm:invisible">·</h3>
           <ul className="space-y-1.5 text-sm text-white/70">
-            {SECTIONS.slice(half).map((s) => (
+            {sorted.slice(half).map((s) => (
               <li key={s.slug}>
                 <Link href={withLang(s.href)} className="transition-colors hover:text-white">
                   {lang === "ru" ? s.ru : s.kz}
