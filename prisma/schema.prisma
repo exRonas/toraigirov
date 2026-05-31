@@ -1,0 +1,116 @@
+// Prisma schema — Sultanmakhmut Toraygyrov Virtual Encyclopedia
+// SQLite single-file database, no external server required.
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "sqlite"
+  url      = env("DATABASE_URL")
+}
+
+model Article {
+  id          String   @id @default(cuid())
+  sectionSlug String
+  title_kz    String
+  title_ru    String
+  content_kz  String
+  content_ru  String
+  coverImage  String?
+  publishedAt DateTime @default(now())
+  isDraft     Boolean  @default(true)
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+
+  @@index([sectionSlug])
+  @@index([isDraft])
+}
+
+model Poem {
+  id          String   @id @default(cuid())
+  title_kz    String
+  title_ru    String
+  text_kz     String
+  text_ru     String
+  yearWritten Int?
+  audioFile   String?
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+}
+
+model Photo {
+  id        String   @id @default(cuid())
+  filename  String
+  title_kz  String?
+  title_ru  String?
+  altText   String?
+  category  String   @default("general")
+  sortOrder Int      @default(0)
+  createdAt DateTime @default(now())
+
+  @@index([category])
+}
+
+model PhotoCategory {
+  id      String @id @default(cuid())
+  slug    String @unique
+  name_kz String
+  name_ru String
+}
+
+model Video {
+  id         String   @id @default(cuid())
+  youtubeUrl String
+  youtubeId  String
+  title_kz   String
+  title_ru   String
+  category   String   @default("general")
+  createdAt  DateTime @default(now())
+}
+
+model BibliographyEntry {
+  id        String   @id @default(cuid())
+  author    String
+  title_kz  String
+  title_ru  String
+  year      Int?
+  publisher String?
+  type      String   @default("book") // book | article | dissertation | other
+  notes_kz  String?
+  notes_ru  String?
+  createdAt DateTime @default(now())
+
+  @@index([type])
+}
+
+model Page {
+  id         String   @id @default(cuid())
+  slug       String   @unique // matches section slug
+  title_kz   String
+  title_ru   String
+  content_kz String
+  content_ru String
+  updatedAt  DateTime @updatedAt
+}
+
+model SiteSettings {
+  id             String   @id @default("singleton")
+  heroQuote_kz   String   @default("")
+  heroQuote_ru   String   @default("")
+  quoteAuthor_kz String   @default("Сұлтанмахмұт Торайғыров")
+  quoteAuthor_ru String   @default("Султанмахмут Торайгыров")
+  siteTitle_kz   String   @default("Виртуалды энциклопедия")
+  siteTitle_ru   String   @default("Виртуальная энциклопедия")
+  footerText_kz  String   @default("")
+  footerText_ru  String   @default("")
+  linkVk         String   @default("")
+  linkFacebook   String   @default("")
+  linkTelegram   String   @default("")
+  linkInstagram  String   @default("")
+  linkYoutube    String   @default("")
+  contactAddress String   @default("")
+  contactPhone   String   @default("")
+  contactEmail   String   @default("")
+  updatedAt      DateTime @updatedAt
+}
