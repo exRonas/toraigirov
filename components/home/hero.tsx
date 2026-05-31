@@ -42,7 +42,7 @@ export function Hero({
           <p className="mt-2 font-serif text-xl text-primary">1893 — 1920</p>
 
           {quote && (
-            <blockquote className="mx-auto mt-6 max-w-xl border-l-4 border-accent pl-4 text-left md:mx-0">
+            <blockquote className="mx-auto mt-6 max-w-xl border-l-4 border-primary/50 pl-4 text-left md:mx-0">
               <p className="font-serif text-lg italic leading-relaxed text-foreground">
                 «{quote}»
               </p>

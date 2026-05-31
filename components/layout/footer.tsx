@@ -22,7 +22,7 @@ export function Footer({ settings }: { settings: Settings }) {
   const half = Math.ceil(SECTIONS.length / 2);
 
   return (
-    <footer className="mt-12 border-t-4 border-secondary bg-nav-bg text-nav-text no-print">
+    <footer className="mt-12 border-t-2 border-white/20 bg-nav-bg text-nav-text no-print">
       <div className="mx-auto grid max-w-site gap-8 px-4 py-10 sm:grid-cols-2 lg:grid-cols-4">
         {/* About */}
         <div>
@@ -97,7 +97,7 @@ export function Footer({ settings }: { settings: Settings }) {
                     href={s.href}
                     target="_blank"
                     rel="noopener noreferrer"
-                    className="rounded border border-white/20 px-2.5 py-1 text-xs hover:border-secondary hover:text-secondary"
+                    className="rounded border border-white/20 px-2.5 py-1 text-xs hover:border-white hover:text-white"
                   >
                     {s.label}
                   </a>
