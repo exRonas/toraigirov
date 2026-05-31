@@ -57,7 +57,7 @@ async function main() {
         "С. Торайғыров атындағы Павлодар облыстық ғылыми кітапханасы",
       footerText_ru:
         "Павлодарская областная научная библиотека имени С. Торайгырова",
-      contactAddress: "Павлодар, ул. Кутузова, 4",
+      contactAddress: "ул. Академика Сатпаева, 104, Павлодар",
       contactPhone: "+7 (7182) 00-00-00",
       contactEmail: "library@pavlodar.kz",
       linkYoutube: "",
