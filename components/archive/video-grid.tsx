@@ -10,7 +10,9 @@ import { EmptyState } from "@/components/ui/empty-state";
 
 export type VideoItem = {
   id: string;
-  youtubeId: string;
+  youtubeId?: string | null;
+  videoFile?: string | null;
+  thumbnail?: string | null;
   title_kz: string;
   title_ru: string;
   category: string;
@@ -69,6 +71,8 @@ export function VideoGrid({
               video={{
                 id: v.id,
                 youtubeId: v.youtubeId,
+                videoFile: v.videoFile,
+                thumbnail: v.thumbnail,
                 title: pick(lang, v, "title"),
                 categoryLabel: cat
                   ? lang === "ru"
@@ -100,13 +104,22 @@ export function VideoGrid({
               </button>
             </div>
             <div className="aspect-video w-full overflow-hidden rounded-lg bg-black">
-              <iframe
-                src={youtubeEmbedUrl(playing.youtubeId)}
-                title={pick(lang, playing, "title")}
-                className="h-full w-full"
-                allow="accelerometer; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-                allowFullScreen
-              />
+              {playing.youtubeId ? (
+                <iframe
+                  src={youtubeEmbedUrl(playing.youtubeId)}
+                  title={pick(lang, playing, "title")}
+                  className="h-full w-full"
+                  allow="accelerometer; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                  allowFullScreen
+                />
+              ) : playing.videoFile ? (
+                <video
+                  src={playing.videoFile}
+                  controls
+                  autoPlay
+                  className="h-full w-full"
+                />
+              ) : null}
             </div>
           </div>
         </div>

@@ -17,8 +17,25 @@ export async function POST(req: NextRequest) {
   return withGuard(async () => {
     await requireAuth();
     const body = await req.json();
+
+    // Local MP4 upload
+    if (body.videoFile) {
+      if (!body.videoFile.startsWith("/uploads/")) return badRequest("Invalid video file path");
+      const video = await prisma.video.create({
+        data: {
+          videoFile: body.videoFile,
+          thumbnail: body.thumbnail || null,
+          title_kz: body.title_kz || "",
+          title_ru: body.title_ru || "",
+          category: body.category || "general",
+        },
+      });
+      return ok(video, 201);
+    }
+
+    // YouTube URL
     const youtubeId = extractYouTubeId(body.youtubeUrl || "");
-    if (!youtubeId) return badRequest("Invalid YouTube URL");
+    if (!youtubeId) return badRequest("Укажите YouTube-ссылку или загрузите MP4-файл");
     const video = await prisma.video.create({
       data: {
         youtubeUrl: body.youtubeUrl,

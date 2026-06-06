@@ -61,8 +61,10 @@ model PhotoCategory {
 
 model Video {
   id         String   @id @default(cuid())
-  youtubeUrl String
-  youtubeId  String
+  youtubeUrl String?
+  youtubeId  String?
+  videoFile  String?  // local MP4 URL e.g. /uploads/video.mp4
+  thumbnail  String?  // auto-generated cover frame for local MP4
   title_kz   String
   title_ru   String
   category   String   @default("general")

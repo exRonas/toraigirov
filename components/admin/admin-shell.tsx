@@ -5,19 +5,19 @@ import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { signOut } from "next-auth/react";
 import {
-  LayoutDashboard, Newspaper, ScrollText, Images, Film, Library,
-  FileText, Settings, LogOut, ExternalLink, Menu, X,
+  LayoutDashboard, Newspaper, ScrollText, FolderOpen, Library,
+  FileText, Settings, LogOut, ExternalLink, Menu, X, HelpCircle,
 } from "lucide-react";
 
 const NAV = [
   { href: "/admin", label: "Панель", icon: LayoutDashboard, exact: true },
   { href: "/admin/articles", label: "Статьи", icon: Newspaper },
   { href: "/admin/poems", label: "Стихи", icon: ScrollText },
-  { href: "/admin/photos", label: "Фотоархив", icon: Images },
-  { href: "/admin/videos", label: "Видеоархив", icon: Film },
+  { href: "/admin/archive", label: "Фото / Видео архив", icon: FolderOpen },
   { href: "/admin/bibliography", label: "Библиография", icon: Library },
   { href: "/admin/pages", label: "Страницы разделов", icon: FileText },
   { href: "/admin/settings", label: "Настройки", icon: Settings },
+  { href: "/admin/guide", label: "Гайд", icon: HelpCircle },
 ];
 
 export function AdminShell({ children }: { children: React.ReactNode }) {

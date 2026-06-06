@@ -1,12 +1,14 @@
 "use client";
 
 import Image from "next/image";
-import { Play } from "lucide-react";
+import { Play, FileVideo } from "lucide-react";
 import { youtubeThumbnail } from "@/lib/youtube";
 
 export type VideoCardData = {
   id: string;
-  youtubeId: string;
+  youtubeId?: string | null;
+  videoFile?: string | null;
+  thumbnail?: string | null;
   title: string;
   categoryLabel?: string;
 };
@@ -25,13 +27,27 @@ export function VideoCard({
       aria-label={video.title}
     >
       <div className="relative aspect-video overflow-hidden bg-bg">
-        <Image
-          src={youtubeThumbnail(video.youtubeId)}
-          alt={video.title}
-          fill
-          sizes="(max-width: 768px) 100vw, 400px"
-          className="object-cover transition-transform duration-300 group-hover:scale-105"
-        />
+        {video.youtubeId ? (
+          <Image
+            src={youtubeThumbnail(video.youtubeId)}
+            alt={video.title}
+            fill
+            sizes="(max-width: 768px) 100vw, 400px"
+            className="object-cover transition-transform duration-300 group-hover:scale-105"
+          />
+        ) : video.thumbnail ? (
+          <Image
+            src={video.thumbnail}
+            alt={video.title}
+            fill
+            sizes="(max-width: 768px) 100vw, 400px"
+            className="object-cover transition-transform duration-300 group-hover:scale-105"
+          />
+        ) : (
+          <div className="flex h-full w-full items-center justify-center bg-primary/5">
+            <FileVideo className="h-14 w-14 text-primary/30" />
+          </div>
+        )}
         <span className="absolute inset-0 flex items-center justify-center bg-black/25 transition-colors group-hover:bg-black/40">
           <span className="flex h-14 w-14 items-center justify-center rounded-full bg-primary/90 text-white shadow-lg">
             <Play className="h-7 w-7 translate-x-0.5" fill="currentColor" />

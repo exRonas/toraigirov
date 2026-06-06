@@ -15,9 +15,13 @@ const AUDIO_TYPES: Record<string, string> = {
   "audio/mpeg": "mp3",
   "audio/mp3": "mp3",
 };
+const VIDEO_TYPES: Record<string, string> = {
+  "video/mp4": "mp4",
+};
 
-const MAX_IMAGE = 10 * 1024 * 1024; // 10 MB
-const MAX_AUDIO = 25 * 1024 * 1024; // 25 MB
+const MAX_IMAGE = 10 * 1024 * 1024;   // 10 MB
+const MAX_AUDIO = 25 * 1024 * 1024;   // 25 MB
+const MAX_VIDEO = 500 * 1024 * 1024;  // 500 MB
 
 export async function POST(req: NextRequest) {
   return withGuard(async () => {
@@ -31,14 +35,22 @@ export async function POST(req: NextRequest) {
       return badRequest("No file provided");
     }
 
-    const allowed = kind === "audio" ? AUDIO_TYPES : IMAGE_TYPES;
-    const maxSize = kind === "audio" ? MAX_AUDIO : MAX_IMAGE;
+    const allowed =
+      kind === "audio" ? AUDIO_TYPES :
+      kind === "video" ? VIDEO_TYPES :
+      IMAGE_TYPES;
+    const maxSize =
+      kind === "audio" ? MAX_AUDIO :
+      kind === "video" ? MAX_VIDEO :
+      MAX_IMAGE;
     const ext = allowed[file.type];
 
     if (!ext) {
       return badRequest(
         kind === "audio"
           ? "Invalid file type. Only MP3 is allowed."
+          : kind === "video"
+          ? "Invalid file type. Only MP4 is allowed."
           : "Invalid file type. Only JPG, PNG, WEBP are allowed."
       );
     }

@@ -7,7 +7,7 @@ export function LanguageSwitcher() {
 
   return (
     <div
-      className="flex items-center gap-0.5 rounded-full border border-white/25 p-0.5"
+      className="inline-flex items-center gap-0.5 rounded-full border-2 border-nav-bg bg-white p-1"
       role="group"
       aria-label="Тіл / Язык"
     >
@@ -17,10 +17,10 @@ export function LanguageSwitcher() {
           onClick={() => setLang(l)}
           aria-pressed={lang === l}
           aria-label={l === "ru" ? "Русский язык" : "Қазақ тілі"}
-          className={`rounded-full px-3 py-1 text-xs font-semibold transition-all duration-150 ${
+          className={`rounded-full px-3.5 py-1.5 text-xs font-bold transition-all duration-150 ${
             lang === l
-              ? "bg-white text-primary shadow-sm"          // белая таблетка, синий текст
-              : "text-white/65 hover:bg-white/10 hover:text-white"
+              ? "bg-nav-bg text-white shadow-md"
+              : "bg-transparent text-text-muted hover:text-text"
           }`}
         >
           {l.toUpperCase()}

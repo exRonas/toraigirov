@@ -21,7 +21,7 @@ export const SECTIONS: SectionDef[] = [
   { slug: "in-art", kz: "С.Торайғыров өнерде", ru: "С.Торайгыров в искусстве", icon: "Palette", href: "/in-art", hasArticles: true },
   { slug: "toraygyrov-land", kz: "Сұлтанмахмұт жерінде", ru: "На земле Султанмахмуда", icon: "Mountain", href: "/toraygyrov-land", hasArticles: true },
   { slug: "bibliography", kz: "Библиография", ru: "Библиография", icon: "Library", href: "/bibliography", hasArticles: false },
-  { slug: "archive", kz: "Фото, видео – архив", ru: "Фото, видео – архив", icon: "Images", href: "/archive/photos", hasArticles: false },
+  { slug: "archive", kz: "Фото, видео – архив", ru: "Фото, видео – архив", icon: "Images", href: "/archive", hasArticles: false },
   { slug: "poems", kz: "Өлеңдері", ru: "Стихи", icon: "ScrollText", href: "/poems", hasArticles: false },
 ];
 
